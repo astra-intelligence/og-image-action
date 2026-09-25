@@ -1,0 +1,66 @@
+name: "OG Image Generator"
+description: "Generate beautiful Open Graph social preview images for your GitHub repositories automatically. Works for any repo — generates 1200×630 PNG perfect for social sharing."
+author: "Adventure Products"
+branding:
+  icon: "image"
+  color: "blue"
+
+inputs:
+  repo:
+    description: "Repository name (e.g., owner/repo). Defaults to the current repo."
+    required: false
+    default: ${{ github.repository }}
+  output-path:
+    description: "Path to save the generated OG image"
+    required: false
+    default: "og-image.png"
+  template:
+    description: "Template style: default, gradient, minimal, bold, dark"
+    required: false
+    default: "default"
+  license-key:
+    description: "Gumroad license key for premium templates with custom colors. Get one at https://grantshatz.gumroad.com/l/og-preview-api-license"
+    required: false
+    default: ""
+
+outputs:
+  image-path:
+    description: "Path to the generated OG image file"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        pip install pillow requests
+
+    - name: Generate OG Image
+      shell: bash
+      id: generate
+      env:
+        INPUT_REPO: ${{ inputs.repo }}
+        INPUT_OUTPUT: ${{ inputs.output-path }}
+        INPUT_TEMPLATE: ${{ inputs.template }}
+        INPUT_LICENSE_KEY: ${{ inputs.license-key }}
+        GITHUB_TOKEN: ${{ github.token }}
+      run: python "${{ github.action_path }}/generate-og.py"
+
+    - name: Upload OG image as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: og-image
+        path: ${{ inputs.output-path }}
+
+    - name: Set output
+      shell: bash
+      run: |
+        echo "image-path=${{ inputs.output-path }}" >> $GITHUB_OUTPUT
