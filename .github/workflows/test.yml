@@ -1,0 +1,52 @@
+name: Test OG Image Generation
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Test with default template
+        uses: ./
+        with:
+          repo: astra-intelligence/og-image-action
+          template: default
+          output-path: test-default.png
+          
+      - name: Test with gradient template
+        uses: ./
+        with:
+          repo: astra-intelligence/og-image-action
+          template: gradient
+          output-path: test-gradient.png
+          
+      - name: Test with minimal template
+        uses: ./
+        with:
+          repo: astra-intelligence/og-image-action
+          template: minimal
+          output-path: test-minimal.png
+          
+      - name: Test with bold template
+        uses: ./
+        with:
+          repo: astra-intelligence/og-image-action
+          template: bold
+          output-path: test-bold.png
+          
+      - name: Test with dark template
+        uses: ./
+        with:
+          repo: astra-intelligence/og-image-action
+          template: dark
+          output-path: test-dark.png
+          
+      - name: Upload all test images
+        uses: actions/upload-artifact@v4
+        with:
+          name: og-test-images
+          path: test-*.png
