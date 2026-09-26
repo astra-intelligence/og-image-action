@@ -1,8 +1,8 @@
 # OG Image Generator — GitHub Action
 
 [![GitHub release](https://img.shields.io/github/v/release/astra-intelligence/og-image-action)](https://github.com/astra-intelligence/og-image-action/releases)
-[![GitHub Marketplace](https://img.shields.io/badge/GitHub-Marketplace-blue)](https://github.com/marketplace/actions/og-image-generator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-%24-blueviolet)](https://grantshatz.gumroad.com/l/kcdpnv)
 
 Generate beautiful Open Graph social preview images for your GitHub repositories. A **1280×640 PNG** perfect for social sharing on Twitter/X, LinkedIn, Slack, Discord, and iMessage.
 
