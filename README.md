@@ -129,6 +129,10 @@ The action:
 3. Saves it as an artifact and outputs the path
 4. You can commit it or use it in deployment workflows
 
+## Tools
+
+**[GitHub Stats Card](https://167.233.135.161:8083)** — Free profile README stats card with stars, languages, and premium themes. Generate yours at [167.233.135.161:8083](https://167.233.135.161:8083)
+
 ## License
 
 MIT — free for any use. Premium features require a license key.
